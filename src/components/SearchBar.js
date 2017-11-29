@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text } from 'react-native';
+import { View, TextInput, Image, TouchableHighlight } from 'react-native';
 import { Spinner } from '../components/common';
 
 class SearchBar extends Component {
@@ -10,7 +10,13 @@ class SearchBar extends Component {
       return <Spinner size="small" />;      
     }
     else if (this.state.term !== '') {
-      return <Text>XXXXXX</Text>;
+      return (
+        <TouchableHighlight style={{ flex: 1 }} onPress={() => this.setState({ term: '' })} >
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Image style = {{ width: 20, height: 20 }} source = { require('../images/icon-x.png') } />
+          </View>
+        </TouchableHighlight>
+      );
     }
   }
 

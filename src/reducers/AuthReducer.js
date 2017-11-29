@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   password: '',
   regConfPass: '',  
   error: '',
+  success: '',
   user: null,
   loading: false
 };
@@ -26,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
     case REG_USER_FAILED:
       return { ...state, password: '', regConfPass: '', loading: false, error: action.payload };
     case REG_USER_SUCCESS:
-      return { ...state, ...INITIAL_STATE, user: action.payload };
+      return { ...state, ...INITIAL_STATE, user: action.payload, success: 'Registration Successful' };
     default:
       return state;
   }

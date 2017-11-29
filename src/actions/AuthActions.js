@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
   LOGIN_USER_FAILED,
@@ -21,17 +22,40 @@ export const loginStart = ({ email, password }) => {
     
     };
   };
-  
+
   const loginUserSuccess = (dispatch, user) => {
-    dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+    console.log(user);
+    const storage = {
+      uid: user.uid
+    };
+    console.log(storage);
+    AsyncStorage.setItem('currentUser', JSON.stringify(storage))
+      .then(() => {
+        dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
+        Actions.mainSceens();        
+      })
+      .catch((error) => console.log(error));
     
-    Actions.mainSceens();
+    
   };
   
   const loginUserFailed = (dispatch) => {
     dispatch({ type: LOGIN_USER_FAILED });
   };
   
+
+export const loginWithFacebook = ({ atoken }) => {
+
+  return (dispatch) => {
+    dispatch({ type: INPUT_UPDATE, payload: { prop: 'loading', value: true } });
+
+    const credential = firebase.auth.FacebookAuthProvider.credential(atoken.accessToken);
+    firebase.auth().signInWithCredential(credential)
+      .then(user => loginUserSuccess(dispatch, user));
+
+  };
+};
+
 //REGISTERING USER
 
 export const regStart = ({ email, password }) => {
@@ -48,7 +72,7 @@ export const regStart = ({ email, password }) => {
   
   const regUserSuccess = (dispatch, user) => {
     dispatch({ type: REG_USER_SUCCESS, payload: user });
-    
+  
     Actions.registerScene();
   };
   

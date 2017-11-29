@@ -17,6 +17,7 @@ class MainScene extends Component {
   searchYT = term => {
     this.setState({ loading: true });
     YTSearch({ key: API_KEY, term }, videos => {
+      console.log(this.state.videos);
       this.setState({ loading: false, videos });
     });
   }
