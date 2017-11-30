@@ -5,14 +5,14 @@ import VideoListItem from './VideoListItem';
 const VideoList = ({ videos }) => {
   const videoItems = videos.map(video => (
     <VideoListItem
-      key={video.etag}
-      video={video} />
+      key = { video.etag }
+      video = { video } />
   ));
 
   return (
     <ScrollView>
-      <View style={{ flex: 2, marginBottom: 10, marginLeft: 10, marginRight: 10 }}> 
-        {videoItems}
+      <View style = {{ flex: 2, marginBottom: 10, marginLeft: 10, marginRight: 10 }}> 
+        { videoItems }
       </View>
     </ScrollView>
   );
