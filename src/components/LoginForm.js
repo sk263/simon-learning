@@ -53,7 +53,6 @@ class LoginForm extends Component {
         </View>
         <View style = { { flex: 2, justifyContent: 'space-around', alignItems: 'center' } } >
           <LoginButton 
-            publishPermissions = { ['public_profile'] }
             onLoginFinished = {
               (error, result) => {
                 if (error) {
