@@ -6,18 +6,13 @@ import { connect } from 'react-redux';
 import { addFavorite, removeFavorite } from '../actions';
 
 class VideoListItem extends Component {
-  state = { user: '', databId: '' };
-
-  componentWillMount() {
-    const { currentUser } = firebase.auth();
-    this.setState({ user: currentUser.uid });
-  }
+  state = { databId: '' };
 
   componentDidMount() {
     const { video } = this.props;
     const { videoId } = video.id;
 
-    firebase.database().ref(`userFav/${this.state.user}/${videoId}`).once('value')
+    firebase.database().ref(`userFav/${this.props.currentUser}/${videoId}`).once('value')
       .then(snapshot => this.setState({ databId: (snapshot.val().videoId) }))
       .catch(() => {});
   }
@@ -135,10 +130,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { currentUser, dbVideoId } = state.video;
+  const { currentUser } = state.video;
   return {
-    currentUser,
-    dbVideoId
+    currentUser
   };
 };
 
