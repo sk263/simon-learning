@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, AsyncStorage } from 'react-native';
+import { StatusBar, View, AsyncStorage, Platform } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
@@ -10,9 +10,8 @@ import { Spinner } from './components/common';
 
 const store = createStore(reducers, {}, applyMiddleware(ReduxThunk)) ;
 
-
 class App extends Component {
-  state = { loggedIn: false, loading: true };
+  state = { loggedIn: false, loading: true, paddingT: 0 };
 
   componentWillMount() {
     const config = {
@@ -24,6 +23,10 @@ class App extends Component {
       messagingSenderId: "169841476081"
     };
     firebase.initializeApp(config);
+
+    if (Platform.Version > 20) {
+      this.setState({ paddingT: 24 });
+    } else {}
 
   }
  
@@ -54,7 +57,7 @@ class App extends Component {
     } else {
         return (
           <Provider store = { store } >
-            <SceneManager loggedIn = { this.state.loggedIn } />
+            <SceneManager loggedIn = { this.state.loggedIn } paddingT = { this.state.paddingT } />
           </Provider>
         );
     }

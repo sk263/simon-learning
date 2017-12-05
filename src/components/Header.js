@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { Icon } from 'react-native-elements';
 import firebase from 'firebase';
 import { LoginManager } from 'react-native-fbsdk';
 
 class Header extends Component {
   render() {
-    const { containerStyle, textStyle, favoritesStyle, favIconStyle, logoutStyle } = styles;
+    const { containerStyle, textStyle, favoritesStyle, logoutStyle } = styles;
     
     return (  
       <View style = { containerStyle }>
-      
         <Text style = { textStyle }>FirstAPP</Text>
         <TouchableOpacity 
           style = { favoritesStyle } 
           onPress = { () => Actions.favoritesScene() } >
-          <Image
-            style = { favIconStyle }
-            source = { require('../images/favorites.png') } />
+          <Icon
+            name='favorite-border'
+            type='materialicons'
+            color='#ffffff' />
         </TouchableOpacity>
         <TouchableOpacity 
           style = { logoutStyle } 
@@ -25,9 +26,10 @@ class Header extends Component {
                               .then(() => firebase.auth().signOut())
                               .then(() => LoginManager.logOut())
                               .then(() => Actions.root()); } } >
-          <Image
-            style = { favIconStyle }
-            source = { require('../images/logout.png') } />
+          <Icon
+            name='md-log-out'
+            type='ionicon'
+            color='#ffffff' />
         </TouchableOpacity>
       </View> 
     );
@@ -46,10 +48,6 @@ const styles = {
     fontSize: 24,
     textAlign: 'center', 
     color: '#fff'
-  },
-  favIconStyle: {
-    width: 20,
-    height: 20
   },
   favoritesStyle: {
     position: 'absolute',

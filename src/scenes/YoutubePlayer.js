@@ -1,18 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import Youtube from 'react-native-youtube';
+import YouTube from 'react-native-youtube';
+import YTPlayerHeader from '../components/YTPlayerHeader';
 
-class YoutubePlayer extends Component {
+const YoutubePlayer = ({ videoId }) => {
 
-  render(){
-    const apiKey = "AIzaSyAlEtJqvwP4oJc3BAiRW4B8XQw8T3XjIzU";
-    const { videoId } = this.props;
     return (
-      <View>
-        <Youtube  apiKey = { apiKey } videoId = 'snpatsa1kRw' play ={true} hidden = { false } fullscreen = { true } loop = { false } style = {{ alignSelf: 'stretch', height: 300, backgroundColor: 'black', marginVertical: 10 }} />
-      </View> 
+      <View style = { { flex: 1 } }>
+        <YTPlayerHeader />
+        <YouTube
+          apiKey = "AIzaSyAlEtJqvwP4oJc3BAiRW4B8XQw8T3XjIzU"
+          videoId={ videoId }   // The YouTube video ID
+          play={true}             // control playback of video with true/false
+          fullscreen={true}       // control whether the video should play in fullscreen or inline
+          loop={true}             // control whether the video should loop when ended
+          style={{ alignSelf: 'stretch', height: 300 }} />
+      </View>
     );
-  }
-}
+};
 
 export default YoutubePlayer;

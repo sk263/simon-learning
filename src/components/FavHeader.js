@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
 const FavHeader = () => {
-  const { containerStyle, textStyle, favoritesStyle, favIconStyle } = styles;
+  const { containerStyle, textStyle, favoritesStyle } = styles;
   return (
     <View style = { containerStyle }>
       <Text style = { textStyle }>Favorite</Text>
       <TouchableOpacity style = { favoritesStyle } onPress = { () => Actions.mainScene() } >
-        <Image
-          style = { favIconStyle }
-          source = { require('../images/back.png') } />
+        <Icon
+          name='ios-arrow-back'
+          type='ionicon'
+          color='#ffffff' />
       </TouchableOpacity>
     </View> 
   );
@@ -29,13 +31,10 @@ const styles = {
     textAlign: 'center', 
     color: '#fff'
   },
-  favIconStyle: {
-    width: 20,
-    height: 20
-  },
   favoritesStyle: {
     position: 'absolute',
-    left: 24
+    left: 16,
+    padding: 8
   },
 };
 

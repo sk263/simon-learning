@@ -29,10 +29,10 @@ class MainScene extends Component {
     <View style={{ flex: 1 }} >
       <Header />
       <SearchBar 
-        loading={loading}
-        onSearch={this.onSearch} />
+        loading = { loading }
+        onSearch = { this.onSearch } />
       <VideoList
-        videos={videos} />
+        videos = { videos } />
     </View>
     );
   }

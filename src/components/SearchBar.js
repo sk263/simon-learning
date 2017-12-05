@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, TextInput, Image, TouchableHighlight } from 'react-native';
+import { View, TextInput, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { Spinner } from '../components/common';
 
 class SearchBar extends Component {
@@ -11,31 +12,46 @@ class SearchBar extends Component {
     }
     else if (this.state.term !== '') {
       return (
-        <TouchableHighlight style={{ flex: 1 }} onPress={() => this.setState({ term: '' })} >
+        <TouchableOpacity style={{ flex: 1 }} onPress={() => this.setState({ term: '' })} >
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Image style = {{ width: 20, height: 20 }} source = { require('../images/icon-x.png') } />
+            <Icon 
+              name = 'x-circle'
+              type = 'foundation'
+              color = 'red' />
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       );
     }
   }
 
   render(){
     return (
-      <View style={{ flexDirection: 'row', height: 60, paddingTop: 10 }}>
+      <View style = { styles.containerStyle  }>
         <TextInput
-          style={{ flex: 9, height: 50 }}
-          onChangeText={term => {
+          style = { { flex: 9, height: 50 } }
+          onChangeText = { term => {
             this.setState({ term });
             this.props.onSearch(term);
             }}
-          value={this.state.term}
-          placeholder='Search...' />
+          value = { this.state.term }
+          placeholder = 'Search...' />
         
         {this.renderLoading()}
       </View>
     );
   }
 }
+
+const styles = {
+  containerStyle: {
+    flexDirection: 'row', 
+    height:58, 
+    justifyContent: 'center', 
+    borderBottomColor: '#a3a3a3',
+    borderBottomWidth: 3,
+    paddingLeft: 16,
+    paddingRight: 16
+  }
+};
 
 export default SearchBar;

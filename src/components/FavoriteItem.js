@@ -8,7 +8,7 @@ class FavoriteItem extends Component {
     const { videoId, title, channelTitle, url } = this.props.favorite;
     const { containerStyle, imageStyle, infoContainerStyle, titleStyle } = styles;
     return (
-      <TouchableOpacity style = { containerStyle } onPress = { () => Actions.ytPlayer(this) } >
+      <TouchableOpacity style = { containerStyle } onPress = { () => Actions.ytPlayer({ videoId }) } >
         <Image source = { { uri: url } } style = { imageStyle } />        
         
         <View style = { infoContainerStyle } >

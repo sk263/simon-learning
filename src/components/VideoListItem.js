@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { addFavorite, removeFavorite } from '../actions';
@@ -44,20 +45,23 @@ class VideoListItem extends Component {
   renderStar() {
     const { video } = this.props;
     const { videoId } = video.id;
-    const { starStyle } = styles;
 
     if (videoId === this.state.databId) {
-      return ( 
-        <Image 
-          style = { starStyle } 
-          source = { require( '../images/starGold.png' ) } /> 
+      return (
+        <Icon
+          name = 'favorite'
+          type = 'materialicons'
+          color = 'red'
+          size = { 42 } />
       );
     }
     else {
       return ( 
-        <Image 
-          style = { starStyle } 
-          source = { require( '../images/star.png' ) } /> 
+        <Icon
+          name = 'favorite'
+          type = 'materialicons'
+          color = 'white'
+          size = { 42 } /> 
       );
    
     }
@@ -127,10 +131,6 @@ const styles = {
     position: 'absolute',
     top: 20,
     right: 20
-  },
-  starStyle: {
-    width: 60,
-    height: 60
   }
 };
 

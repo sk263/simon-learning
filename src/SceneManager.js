@@ -6,12 +6,10 @@ import MainScene from './scenes/MainScene';
 import FavoritesScene from './scenes/FavoritesScene';
 import YoutubePlayer from './scenes/YoutubePlayer';
 
-
-
-const SceneManager = ({ loggedIn }) => {
+const SceneManager = ({ loggedIn, paddingT }) => {
   return ( 
-    <Router sceneStyle = { { paddingTop: 24 } }>
-      <Scene key = "root" initial = { !loggedIn } type={ActionConst.REPLACE}>
+    <Router sceneStyle = { { paddingTop: paddingT } }>
+      <Scene key = "root" initial = { !loggedIn } type = { ActionConst.REPLACE }>
         <Scene key = "loginScene" component = { LoginScene } hideNavBar = { true } />
         <Scene key = "registerScene" component = { RegisterScene } hideNavBar = { true } />
       </Scene>
